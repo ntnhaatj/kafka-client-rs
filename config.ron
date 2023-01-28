@@ -1,0 +1,20 @@
+ConfigFile (
+    librdkafka: {
+        "bootstrap.servers": "node-01:9090,node-02:9090",
+        "security.protocol" : "SASL_SSL",
+        "ssl.ca.location" : "resources/ca_root.crt",
+        "sasl.username" : "username",
+        "sasl.password" : "secret",
+        "sasl.mechanisms" : "SCRAM-SHA-256",
+    },
+    strategy: StrategyConfig (
+        name: "throuthput config",
+        typ3: Throughput,
+        throughput: Some(ThroughputStrategy (
+            rate_msg_per_sec: 10000,
+            size_in_bytes: 10,
+            length: 100,
+        ))
+    ),
+    schema_registry_url: "http://schema-registry:8081"
+)
